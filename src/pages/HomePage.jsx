@@ -11,7 +11,7 @@ function HomePage() {
     <div className="flex flex-col items-center">
       <img
         className="block transition-transform duration-300 group-hover:scale-110"
-        src="./public/robot.png"
+        src="/robot.png"
         alt="One player"
       />
     </div>
@@ -26,7 +26,7 @@ function HomePage() {
     <div className="flex flex-col items-center">
       <img
         className="block transition-transform duration-300 group-hover:scale-110"
-        src="./public/twoPlayers.png"
+        src="/twoPlayers.png"
         alt="Two player"
       />
     </div>
