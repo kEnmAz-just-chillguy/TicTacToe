@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRef, useState } from 'react'
 import circle_icon from "/circle.png"
 import cross_icon from "/cross.png"
@@ -8,6 +8,7 @@ import win  from  "/winn.mp3"
 import Draw from "/Draw.mp3"
 import ClickSound from "/click.mp3"
 import confetti from "canvas-confetti";
+import LoadingUI from '../Components/UI/LoadingUI'
 
 
 function TwoPlayersPage() {
@@ -19,10 +20,18 @@ function TwoPlayersPage() {
   const [count, setCount] = useState(0);        
   const [winner,setWinner] = useState("")       
   const [lock, setLock] = useState(false);     
+  const [loading ,setLoading] = useState(true)
 
 
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
+useEffect(() => {
+setTimeout(() => {
+  setLoading(false)
+}, 3000);
+},[])
+
+
 
   const confettiWin = () => {
     confetti({
@@ -130,61 +139,73 @@ function TwoPlayersPage() {
   }
 
   return (
-<div className="flex flex-col items-center px-4">
-  <div className="flex flex-col items-center gap-5 mt-6">
-    <p className="text-white font-bold text-2xl sm:text-3xl text-center min-h-[2.5rem] sm:min-h-[3rem]">
-      {winner === 'draw'
-        ? "It's a draw"
-        : winner
-        ? `Player ${winner} has won the game`
-        : ""}
-    </p>
-  </div>
+<>
+{loading ? (
+       <div className='flex justify-center items-center mt-50'>
+         <LoadingUI />
+       </div>
+      ) : (
+        <div className="flex flex-col items-center px-4">
+          <div className="flex flex-col items-center gap-5 mt-6">
+            <p className="text-white font-bold text-2xl sm:text-3xl text-center min-h-[2.5rem] sm:min-h-[3rem]">
+              {winner === "draw"
+                ? "It's a draw"
+                : winner
+                ? `Player ${winner} has won the game`
+                : ""}
+            </p>
+          </div>
 
-  <div className="flex justify-center mt-6 mb-6">
-    <div className="grid grid-cols-3 gap-2 sm:gap-3">
-      {data.map((value, index) => (
-        <div
-          key={index}
-          onClick={() => toggle(index)}
-          className="select-none rounded-xl border-2 border-black bg-[#1f3540] w-[90px] h-[90px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] flex items-center justify-center"
-        >
-          {value === "x" && (
-            <img
-              src={cross_icon}
-              className="w-[50px] sm:w-[60px] md:w-[80px] lg:w-[100px]"
-            />
-          )}
-          {value === "o" && (
-            <img
-              src={circle_icon}
-              className="w-[50px] sm:w-[60px] md:w-[80px] lg:w-[100px]"
-            />
-          )}
+          <div className="flex justify-center mt-6 mb-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              {data.map((value, index) => (
+                <div
+                  key={index}
+                  onClick={() => toggle(index)}
+                  className="select-none rounded-xl border-2 border-black bg-[#1f3540] w-[90px] h-[90px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] flex items-center justify-center"
+                >
+                  {value === "x" && (
+                    <img
+                      src={cross_icon}
+                      className="w-[50px] sm:w-[60px] md:w-[80px] lg:w-[100px]"
+                    />
+                  )}
+                  {value === "o" && (
+                    <img
+                      src={circle_icon}
+                      className="w-[50px] sm:w-[60px] md:w-[80px] lg:w-[100px]"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between w-[600px] px-6">
+            <button
+              onClick={leavePage}
+              className="bg-[hsl(49,98%,60%)] text-center w-48 h-14 mt-5 rounded-2xl relative text-white text-xl font-semibold group overflow-hidden"
+              type="button"
+            >
+              <div className="bg-red-600 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="25px" width="25px">
+                  <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" fill="#000000" />
+                  <path d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" fill="#000000" />
+                </svg>
+              </div>
+              <p
+                className="translate-x-2 font-semibold text-xl"
+                style={{ textShadow: "2px 2px rgb(116,116,116)" }}
+              >
+                Go Back
+              </p>
+            </button>
+
+            <ButtonUI onCustomClick={resetGame} />
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-  <div className="flex items-center justify-between w-[600px] px-6">
-  <button 
-    onClick={leavePage} 
-    className="bg-[hsl(49,98%,60%)]  text-center w-48 h-14 mt-5 rounded-2xl relative text-white text-xl font-semibold group overflow-hidden"
-    type="button"
-  >
-    <div className="bg-red-600 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="25px" width="25px">
-        <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" fill="#000000" />
-        <path d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" fill="#000000" />
-      </svg>
-    </div>  
-    <p className="translate-x-2  font-semibold text-xl" style={{textShadow:"2px 2px rgb(116,116,116)"}}>Go Back</p>
-  </button>
-
-  <ButtonUI onCustomClick={resetGame} />
-</div>
-
-</div>
-
+      )}
+</>
   )
 }
 
