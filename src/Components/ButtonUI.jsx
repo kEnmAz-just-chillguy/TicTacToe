@@ -44,7 +44,7 @@ const StyledWrapper = styled.div`
     font-weight: 600;
     font-size: 20px;
     background-color: hsl(49deg 98% 60%);
-    border-radius: 50px;
+    border-radius: 20px;
     position: relative;
     overflow: hidden;
     transition: all 0.5s ease;

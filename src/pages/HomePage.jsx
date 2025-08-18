@@ -21,7 +21,7 @@ function HomePage() {
   </p>
 </div>
 
-\<div className="bg-red-600 w-40 h-40 rounded-xl text-center border-4 border-yellow-400 shadow-[0_0_15px_rgba(255,255,0,0.8)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,0,1)] transition-all duration-300">
+<div className="bg-red-600 w-40 h-40 rounded-xl text-center border-4 border-yellow-400 shadow-[0_0_15px_rgba(255,255,0,0.8)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,0,1)] transition-all duration-300">
   <Link to="/two-players" className="group">
     <div className="flex flex-col items-center">
       <img

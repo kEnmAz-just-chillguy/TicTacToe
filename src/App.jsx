@@ -6,7 +6,7 @@ import TwoPlayersPage from './pages/TwoPlayersPage';
 function App() {
 
   return (
-    <div className=' text-center '> 
+    <div className=' text-center select-none'>
      <h1 className='text-white  pt-15 font-extrabold text-3xl sm:text-4xl text-center '>Tic Tac Toe</h1>
      <Routes>
       <Route path='/' element={<HomePage/>}/>
