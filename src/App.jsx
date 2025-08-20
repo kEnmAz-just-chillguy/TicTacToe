@@ -3,6 +3,7 @@ import '@fontsource-variable/honk';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import TwoPlayersPage from './pages/TwoPlayersPage';
+import OnePlayerPage from './pages/OnePlayerPage';
 function App() {
 
   return (
@@ -11,6 +12,7 @@ function App() {
      <Routes>
       <Route path='/' element={<HomePage/>}/>
       <Route path='/two-players' element={<TwoPlayersPage/>}/>
+      <Route path='/one-player' element={<OnePlayerPage/>}/>
      </Routes>
     </div>
   );

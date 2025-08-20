@@ -9,7 +9,7 @@ function HomePage() {
       
       {/* One Player */}
       <div className="bg-blue-600 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-xl text-center border-2 sm:border-4 border-yellow-400 shadow-[0_0_10px_rgba(255,255,0,0.8)] hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,0,1)] transition-all duration-300">
-        <Link to="/single-player" className="text-center group">
+        <Link to="/one-player" className="text-center group">
           <div className="flex flex-col items-center">
             <img
               className="w-14 sm:w-20 md:w-24 transition-transform duration-300 group-hover:scale-110"
