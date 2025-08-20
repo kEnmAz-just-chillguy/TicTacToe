@@ -1,75 +1,65 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 const LoadingUI = () => {
   return (
     <StyledWrapper>
-      <div className="loader">
-        <div className="box1" />
-        <div className="box2" />
-        <div className="box3" />
+      <div className="loader ">
+        {Array.from({ length: 9 }).map((_, i) => (
+          <div key={i} className="square" />
+        ))}
       </div>
     </StyledWrapper>
   );
-}
+};
+
+const pulse = keyframes`
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+`;
 
 const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content; 
+  height: fit-content;
+
   .loader {
-    width: 224px;
-    height: 224px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
   }
 
-  .box1,
-  .box2,
-  .box3 {
-    border: 32px solid #f5f5f5;
-    box-sizing: border-box;
-    position: absolute;
-    display: block;
+  .square {
+    width: 80px;
+    height: 80px;
+    border-radius: 0.75rem;
+    border: 2px solid #000;
+    background: #2d3e4b;
+    animation: ${pulse} 1.2s ease-in-out infinite;
   }
 
-  .box1 {
-    width: 224px;
-    height: 96px;
-    margin-top: 128px;
-    margin-left: 0px;
-    animation: abox1 2s 0.5s forwards ease-in-out infinite;
+  @media (min-width: 640px) {
+    .square {
+      width: 110px;
+      height: 110px;
+    }
   }
 
-  .box2 {
-    width: 96px;
-    height: 96px;
-    margin-top: 0px;
-    margin-left: 0px;
-    animation: abox2 2s 0.5s forwards ease-in-out infinite;
+  @media (min-width: 768px) {
+    .square {
+      width: 140px;
+      height: 140px;
+    }
   }
 
-  .box3 {
-    width: 96px;
-    height: 96px;
-    margin-top: 0px;
-    margin-left: 128px;
-    animation: abox3 2s 0.5s forwards ease-in-out infinite;
-  }
-
-  @keyframes abox1 {
-    0% { width: 224px; height: 96px; margin-top: 128px; margin-left: 0; }
-    12.5%, 25%, 37.5%, 50%, 62.5% { width: 96px; height: 96px; margin-top: 128px; margin-left: 0; }
-    75% { width: 96px; height: 224px; margin-top: 0; margin-left: 0; }
-    87.5%, 100% { width: 96px; height: 96px; margin-top: 0; margin-left: 0; }
-  }
-
-  @keyframes abox2 {
-    0%, 12.5%, 25%, 37.5% { width: 96px; height: 96px; margin-top: 0; margin-left: 0; }
-    50% { width: 224px; height: 96px; margin-top: 0; margin-left: 0; }
-    62.5%, 75%, 87.5%, 100% { width: 96px; height: 96px; margin-top: 0; margin-left: 128px; }
-  }
-
-  @keyframes abox3 {
-    0%, 12.5% { width: 96px; height: 96px; margin-top: 0; margin-left: 128px; }
-    25% { width: 96px; height: 224px; margin-top: 0; margin-left: 128px; }
-    37.5%, 50%, 62.5%, 75%, 87.5% { width: 96px; height: 96px; margin-top: 128px; margin-left: 128px; }
-    100% { width: 224px; height: 96px; margin-top: 128px; margin-left: 0; }
+  @media (min-width: 1024px) {
+    .square {
+      width: 170px;
+      height: 170px;
+    }
   }
 `;
 

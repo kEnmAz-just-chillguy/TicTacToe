@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRef, useState } from 'react'
 import circle_icon from "/circle.png"
 import cross_icon from "/cross.png"
-import ButtonUI from '../Components/ButtonUI'
+import ButtonUI from '../Components/UI/ButtonUI'
 import lets from "/let'sk.m4a"
 import win  from  "/winn.mp3"
 import Draw from "/Draw.mp3"
@@ -140,11 +140,7 @@ setTimeout(() => {
 
   return (
 <>
-{loading ? (
-  <div className="flex justify-center items-center mt-20">
-    <LoadingUI />
-  </div>
-) : (
+
   <div className="flex flex-col items-center px-4 w-full">
     {/* Winner text */}
     <div className="flex flex-col items-center gap-5 mt-6">
@@ -158,7 +154,13 @@ setTimeout(() => {
     </div>
 
     {/* Game board */}
-    <div className="flex justify-center mt-6 mb-6 w-full">
+
+{loading 
+    ? 
+    <div className='flex justify-center mt-6 mb-6 w-full'>    <LoadingUI/> </div>
+  
+           
+    : <div className="flex justify-center mt-6 mb-6 w-full">
       <div className="grid grid-cols-3 gap-2 sm:gap-3">
         {data.map((value, index) => (
           <div
@@ -183,7 +185,8 @@ setTimeout(() => {
           </div>
         ))}
       </div>
-    </div>
+    </div>}
+
 
     {/* Buttons */}
     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10 w-full max-w-[600px] px-4">
@@ -213,7 +216,7 @@ setTimeout(() => {
       <ButtonUI onCustomClick={resetGame} />
     </div>
   </div>
-)}
+
 
 </>
   )
