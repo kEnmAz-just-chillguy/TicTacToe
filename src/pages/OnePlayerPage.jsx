@@ -7,26 +7,29 @@ function OnePlayerPage() {
   const [level, setLevel] = useState("");
   const [board,setBoard] = useState(Array(9).fill(""));
   const [isTurn, setIsTurn] = useState(true)
+  const [gameOver,setGameOver] = useState(false)
 
   const toggle = (index) => {
-    if (board[index] !== "" || !isTurn) return;
+    if (board[index] !== "" || !isTurn || gameOver) return;
 
-    setBoard((prev) => {
-      let newBoard = [...prev]
-       newBoard[index] = "x"
-       return newBoard
-    } )
+
+       const newBoard = [...board]
+         newBoard[index] = "x"
+    
 
     const winner = checkWinner(newBoard);
     if (winner) {
-      alert(winner.toUpperCase() + " wins!");
-      return newBoard;
+      setGameOver(true)
+      setBoard(newBoard)
+      setTimeout(() =>     alert(winner.toUpperCase() + " wins!"), 50);
+      return ;
     }
-
+    setBoard(newBoard)
     setIsTurn(false)
     setTimeout( botMove , 500);
   }
   const botMove = () => {
+    if (gameOver) return
     setBoard((prev) => {
       let emptyIndexes = prev
         .map((val, i) => (val === "" ? i : null))
@@ -43,6 +46,7 @@ function OnePlayerPage() {
       
       const winner = checkWinner(newBoard);
       if (winner) {
+        setGameOver(true)
         console.log("Winner is:", winner);
       }
   
@@ -56,14 +60,14 @@ function OnePlayerPage() {
   
   const checkWinner = (board) => {
     const winLines = [
-      [0,1,2]
-      [3,4,5]
-      [6,7,8]
-      [0,3,6]
-      [1,4,7]
-      [2,5,8]
-      [0,4,8]
-      [2,4,6]
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6],
     ]
     for ( let [a,b,c] of winLines) {
       if (board[a] && board[a] === board[b] && board[a] === board[c]){
